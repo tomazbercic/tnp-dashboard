@@ -270,7 +270,7 @@ body.video #credit{display:none}
     <div class="lgn"><b style="color:var(--ink);font-weight:500">Click a row to hide or show it.</b> Dashed pink: mountain bike route.<span class="sl">Klik na vrstico sloj skrije ali prikaže. Črtkano roza: gorskokolesarska pot.</span></div>
   </div>
 </div>
-<div id="credit">Unofficial visualisation · <span class="cd">Data: JZ TNP, ARSO, IJPP, Copernicus GLO-30, © OpenStreetMap · </span>Made with the help of Claude · Tomaž Berčič, UL · <a href="mailto:tomaz.bercic@fa.uni-lj.si">contact · kontakt</a> · <a href="https://www.linkedin.com/in/tomazbercic/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/tomazbercic/tnp-dashboard" target="_blank" rel="noopener">source · koda</a><span id="views" hidden> · <span></span> visits · obiskov</span></div>
+<div id="credit">Unofficial visualisation · <span class="cd">Data: JZ TNP, ARSO, IJPP, Copernicus GLO-30, © OpenStreetMap · </span>Made with the help of Claude · Tomaž Berčič, UL · <a href="mailto:tomaz.bercic@fa.uni-lj.si">contact · kontakt</a> · <a href="https://www.linkedin.com/in/tomazbercic/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/tomazbercic/tnp-dashboard" target="_blank" rel="noopener">source · koda</a><span id="views" hidden title="Visitors · Obiskovalci"> · <span></span></span></div>
 <div class="ui" id="srcwrap"><button class="tg" id="srcbtn" type="button" aria-expanded="false" aria-controls="src">Sources and notes · Viri in opombe</button><div class="glass" id="src" hidden></div></div>
 
 <div class="ui glass" id="tl">
@@ -1118,7 +1118,10 @@ window.__tnp = {camera, controls, applyLayer, setPlay, beacons, busGroup, trainG
       s: [screen.width, screen.height, window.devicePixelRatio || 1].join(','), rnd: Math.random().toString(36).slice(2) });
     new Image().src = GC + '/count?' + q;
   }
-  fetch(GC + '/counter/TOTAL.json').then(r => r.ok ? r.json() : null).then(j => {
+  // GoatCounter caches each counter URL for up to 4 h. A start date before the site existed (14 Nov 2026) gives the
+  // same total, so a different one every 15 minutes keeps the number fresh without changing it.
+  const k = Math.floor(Date.now() / 9e5) % 60, start = new Date(Date.UTC(2026, 10, 1) - k * 864e5).toISOString().slice(0, 10);
+  fetch(GC + '/counter/TOTAL.json?start=' + start).then(r => r.ok ? r.json() : null).then(j => {
     if (!j || !j.count || j.count === '0') return;
     const el = document.getElementById('views');
     el.querySelector('span').textContent = j.count;
