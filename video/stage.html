@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>3D MAP 013 stage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap" rel="stylesheet">
+<style>
+/* Frame 1080 x 1350 px, laid out at 900 x 1125 CSS px and captured at device scale 1.2; sizes are the series values divided by 1.2 */
+:root{--ink:#F0F0EC;--ink2:#ACB0B6;--ink3:#80848A;--red:rgb(255,72,64);--blue:rgb(90,160,255);--bg:#0B0D10}
+*{box-sizing:border-box}
+html,body{margin:0;width:900px;height:1125px;overflow:hidden;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.d{font-variation-settings:'opsz' 32}
+#hdr{position:absolute;left:40px;top:43px;right:40px;z-index:3}
+#ctr{display:inline-block;border:1.5px solid rgba(240,240,236,.85);border-radius:6px;padding:3px 9px 4px;font-weight:600;font-size:21.7px;line-height:1.1;letter-spacing:.02em;font-variant-numeric:tabular-nums}
+#ttl{margin-top:14px;font-weight:600;font-size:48.3px;line-height:1.05;letter-spacing:-.01em}
+#sub{margin-top:9px;font-size:24px;line-height:1.3;color:var(--ink2)}
+#frame{position:absolute;left:0;top:206px;width:900px;height:680px;border:0;display:block}
+#fade{position:absolute;left:0;right:0;top:206px;height:26px;background:linear-gradient(var(--bg),rgba(11,13,16,0));pointer-events:none;z-index:2}
+#cap{position:absolute;left:40px;right:40px;top:904px;z-index:3}
+#cap .en{font-weight:600;font-size:33.3px;line-height:1.15}
+#cap .sl{margin-top:7px;font-size:23.3px;line-height:1.3;color:var(--ink2)}
+#sum{position:absolute;left:0;right:0;top:560px;bottom:0;z-index:4;padding:0 40px;opacity:0;
+  background:linear-gradient(rgba(11,13,16,0),var(--bg) 46px)}
+#sum .row{display:flex;align-items:flex-end;gap:22px;margin-top:62px}
+#big{font-weight:600;font-size:100px;line-height:.86;color:var(--red);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+#big small{font-size:58px;letter-spacing:0}
+#bigtxt{max-width:520px;padding-bottom:2px}
+#bigtxt .en{font-size:23.3px;line-height:1.25}
+#bigtxt .sl{margin-top:5px;font-size:17.5px;line-height:1.3;color:var(--ink2)}
+#bar{display:flex;height:14px;margin-top:30px;width:720px;border-radius:3px;overflow:hidden;gap:3px}
+#bar i{display:block;height:100%}
+#vals{display:flex;width:720px;margin-top:12px}
+#vals>div{flex:none}
+#vals b{display:block;font-weight:600;font-size:27px;line-height:1.1;font-variant-numeric:tabular-nums}
+#vals span{display:block;font-size:15px;line-height:1.3;color:var(--ink)}
+#vals span.sl{font-size:13px;color:var(--ink2)}
+#note{margin-top:28px;max-width:740px}
+#note .en{font-size:20.8px;line-height:1.3}
+#note .sl{margin-top:4px;font-size:17.5px;line-height:1.3;color:var(--ink2)}
+#foot{position:absolute;left:40px;bottom:25px;width:743px;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;z-index:5;font-size:12.9px;line-height:1.4;color:var(--ink3)}
+#foot .src{max-width:560px}
+#sig{font-size:15.8px;color:var(--ink2);white-space:nowrap}
+#hdr,#fade,#cap,#sum,#foot,#stats{pointer-events:none}
+#stats{position:absolute;left:40px;top:640px;width:742px;display:flex;gap:10px;z-index:3}
+#stats .tile{flex:1 1 0;background:rgba(11,13,16,.86);border:1px solid rgba(240,240,236,.14);border-radius:10px;padding:12px 14px 13px;opacity:0;backdrop-filter:blur(6px)}
+#stats b{display:block;font-weight:600;font-size:34px;line-height:1.05;font-variant-numeric:tabular-nums;white-space:nowrap}
+#stats span{display:block;margin-top:6px;font-size:14px;line-height:1.3;color:var(--ink)}
+#stats span.sl{margin-top:3px;font-size:12.5px;color:var(--ink2)}
+#cta{margin-top:22px;display:flex;align-items:center;gap:12px}
+#cta svg{flex:none}
+#cta .en{font-size:18px;line-height:1.25;font-weight:600}
+#cta .sl{font-size:15px;line-height:1.3;color:var(--ink2)}
+#cur{position:absolute;left:0;top:0;width:24px;height:24px;z-index:9;pointer-events:none;opacity:0;filter:drop-shadow(0 2px 3px rgba(0,0,0,.6))}
+#rip{position:absolute;left:0;top:0;width:40px;height:40px;margin:-20px 0 0 -20px;border:2px solid rgba(255,255,255,.9);border-radius:50%;z-index:8;pointer-events:none;opacity:0}
+</style>
+</head>
+<body>
+<div id="hdr">
+  <div id="ctr" class="d">013/100</div>
+  <div id="ttl" class="d">One week in Triglav National Park</div>
+  <div id="sub">A dashboard of visitors, weather and rivers, hour by hour · Nadzorna plošča obiska, vremena in rek, ura za uro</div>
+</div>
+<iframe id="frame" src="/tnp-dashboard/index.html" title="TNP dashboard"></iframe>
+<div id="fade"></div>
+<div id="cap"><div class="en d"></div><div class="sl"></div></div>
+<div id="sum">
+  <div class="row">
+    <div id="big" class="d">72<small>%</small></div>
+    <div id="bigtxt"><div class="en">of the week's 2,242 passages at 12 park counters came on Saturday and Sunday</div><div class="sl">od 2.242 prehodov na 12 števcih v tednu jih je bilo 72 % v soboto in nedeljo</div></div>
+  </div>
+  <div id="bar"><i style="width:26.36%;background:rgb(244,140,128)"></i><i style="width:45.58%;background:var(--red)"></i><i style="width:28.06%;background:var(--blue)"></i></div>
+  <div id="vals">
+    <div style="width:26.36%"><b class="d" style="color:rgb(244,140,128)">591</b><span>Saturday</span><span class="sl">sobota</span></div>
+    <div style="width:45.58%"><b class="d" style="color:var(--red)">1,022</b><span>Sunday</span><span class="sl">nedelja</span></div>
+    <div style="width:28.06%"><b class="d" style="color:var(--blue)">629</b><span>Monday to Friday</span><span class="sl">ponedeljek do petek</span></div>
+  </div>
+  <div id="note"><div class="en">Then rain: 146 mm on Vogel on Thursday and Friday, the Soča at Log Čezsoški rose fifteenfold and the counters went quiet.</div><div class="sl">Nato dež: na Voglu 146 mm v četrtek in petek, Soča v Logu Čezsoškem je narasla 15-krat, števci so utihnili.</div></div>
+  <div id="cta"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><rect x="1" y="1" width="28" height="28" rx="7" fill="none" stroke="rgb(90,160,255)" stroke-width="2"/><path d="M11 19l8-8M13 11h6v6" fill="none" stroke="rgb(90,160,255)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><div><div class="en d">Interactive version: link in the description</div><div class="sl">Interaktivna različica: povezava v opisu</div></div></div>
+</div>
+<div id="stats">
+  <div class="tile"><b class="d" data-v="1022" data-f="int">1,022</b><span>passages on Sunday, the busiest day</span><span class="sl">prehodov v nedeljo</span></div>
+  <div class="tile"><b class="d" data-v="789" data-f="int">789</b><span>at Dolina Tamar, the busiest counter</span><span class="sl">v Dolini Tamar</span></div>
+  <div class="tile"><b class="d" data-v="-10.3" data-f="c" style="color:var(--blue)">−10.3 °C</b><span>coldest hour on Kredarica</span><span class="sl">najhladnejša ura na Kredarici</span></div>
+  <div class="tile"><b class="d" data-v="2049" data-f="int">2,049</b><span>bus and train trips to the timetable</span><span class="sl">voženj avtobusov in vlakov</span></div>
+</div>
+<div id="foot"><div class="src">Data: JZ TNP visitor counters (7 to 13 Nov 2026), ARSO weather and river stations, IJPP timetables, Copernicus GLO-30, © OpenStreetMap. Made with the help of Claude</div><div id="sig">Tomaž Berčič, UL</div></div>
+<svg id="cur" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 2l15.5 10.2-7 1.3 4 7.6-2.9 1.5-4-7.7L3 20z" fill="#fff" stroke="#111" stroke-width="1.3" stroke-linejoin="round"/></svg>
+<div id="rip"></div>
+<script>
+// driven frame by frame by rec.mjs
+const $ = s => document.querySelector(s);
+const capEn = $('#cap .en'), capSl = $('#cap .sl');
+window.setStage = st => {
+  if (st.cap){ capEn.textContent = st.cap[0]; capSl.textContent = st.cap[1]; }
+  $('#cap').style.opacity = st.capA ?? 0;
+  const s = st.sum || 0; $('#sum').style.opacity = s; $('#sum').style.transform = `translateY(${(1-s)*40}px)`; $('#cap').style.visibility = s > .02 ? 'hidden' : 'visible';
+  const c = st.cur || {a:0}; const cur = $('#cur'); cur.style.opacity = c.a; cur.style.transform = `translate(${c.x-3}px,${c.y-2}px)` + (c.down ? ' scale(.92)' : '');
+  // the week in numbers: tiles arrive one after another and count up
+  const ts = st.statsT, tiles = document.querySelectorAll('#stats .tile');
+  tiles.forEach((tl, i) => { if (ts == null){ tl.style.opacity = 0; return; }
+    const u = Math.max(0, Math.min(1, (ts - i*.28)/.45)), out = st.statsOut ?? 1, b = tl.querySelector('b');
+    tl.style.opacity = u*out; tl.style.transform = `translateY(${(1-u)*14}px)`;
+    const k = Math.max(0, Math.min(1, (ts - i*.28)/1.1)), e = 1 - Math.pow(1-k, 3), v = +b.dataset.v*e;
+    b.textContent = b.dataset.f === 'c' ? (v < 0 ? '−' : '') + Math.abs(v).toFixed(1) + ' °C' : Math.round(v).toLocaleString('en-US'); });
+  const r = st.rip || {a:0}; const rip = $('#rip'); rip.style.opacity = r.a; rip.style.transform = `translate(${r.x}px,${r.y}px) scale(${r.s||1})`;
+};
+</script>
+</body>
+</html>

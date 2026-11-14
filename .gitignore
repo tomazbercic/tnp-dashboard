@@ -1,0 +1,7 @@
+# local only
+.claude/
+video/out/
+__pycache__/
+*.pyc
+desktop.ini
+.DS_Store
