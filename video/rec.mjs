@@ -107,7 +107,7 @@ try {
   for (let i = 0; i < 240; i++) { if (await ev(`!!(${IF} && ${IF}.contentWindow && ${IF}.contentWindow.__tnp)`).catch(() => false)) break; await c.sleep(250); }
   await ev(`document.fonts.ready.then(() => true)`);
   await ev(`(() => { const D = ${IF}.contentDocument, st = D.createElement('style');
-    st.textContent = '#title,#beat,#sunarc,#suns,#srcwrap{display:none!important}#left{top:14px!important}#clock{top:12px!important}' + '.vclean #left,.vclean #right,.vclean #tl,.vclean #tools,.vclean #legwrap,.vclean #clock,.vclean #tip{opacity:0!important;transition:opacity .45s}'; D.head.appendChild(st); return true; })()`);
+    st.textContent = '#title,#beat,#sunarc,#suns,#srcwrap,#credit{display:none!important}#left{top:14px!important}#clock{top:12px!important}' + '.vclean #left,.vclean #right,.vclean #tl,.vclean #tools,.vclean #legwrap,.vclean #clock,.vclean #tip{opacity:0!important;transition:opacity .45s}'; D.head.appendChild(st); return true; })()`);
   const step = ms => ev(`(() => { const w = ${IF}.contentWindow; w.__vt.advance(${ms}); w.__vt.anims(${ms}); window.__vt.anims(${ms}); return true; })()`);
   for (let i = 0; i < 60; i++) await step(1000/FPS);    // settle layout, labels and damping before the first frame
   await ev(`(() => { ${IF}.contentWindow.dispatchEvent(new Event('resize')); return true; })()`);
