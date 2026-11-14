@@ -1119,7 +1119,7 @@ window.__tnp = {camera, controls, applyLayer, setPlay, beacons, busGroup, trainG
     new Image().src = GC + '/count?' + q;
   }
   fetch(GC + '/counter/TOTAL.json').then(r => r.ok ? r.json() : null).then(j => {
-    if (!j || !j.count) return;
+    if (!j || !j.count || j.count === '0') return;
     const el = document.getElementById('views');
     el.querySelector('span').textContent = j.count;
     el.hidden = false;
