@@ -7,6 +7,16 @@ Animiran 3D prikaz parka ura za uro: obisk na 12 števcih JZ TNP, vreme z 9 samo
 pretoki z 10 vodomernih postaj ARSO, avtobusi in vlaki po voznem redu IJPP, žičnice in kolesarske poti iz OSM,
 sonce s pravega položaja. Oznake vremenskih postaj kažejo temperaturo in veter (puščica kaže, kam piha).
 Privzeto prikaže zadnjih 7 dni, v izbirniku na časovnici pa lahko izbereš do 31 dni iz arhiva.
+Nad časovnico sta znak za sever in merilo, oba izmerjena v središču pogleda (v perspektivi se merilo proti robu spreminja).
+V vrstici pod časovnico so kontakt (e-pošta UL FA), LinkedIn, koda in število obiskov.
+
+## Štetje obiskov
+
+Obiske javne strani šteje GoatCounter (https://tnp-dashboard.goatcounter.com, brez piškotkov in osebnih podatkov).
+Stran pošlje en zahtevek na obisk, in to samo z naslova tomazbercic.github.io; lokalni predogled, artefakt in video
+se ne štejejo. Število obiskov pod časovnico se pokaže, ko je v nastavitvah GoatCounter vklopljeno
+»Allow adding visitor counts on your website«; sicer ostane skrito. Svoje obiske izklopiš tako, da stran enkrat odpreš
+z `#toggle-goatcounter` na koncu naslova (enako jih spet vklopiš).
 
 ## Mape in datoteke
 
